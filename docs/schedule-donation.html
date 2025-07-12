@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Donation - FoodBridge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #2C9F45, #81C784);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .schedule-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .schedule-hero {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .schedule-hero h1 {
+            color: #2C3E50;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .schedule-hero p {
+            color: #7F8C8D;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .schedule-form {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #34495E;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .food-tag {
+            background-color: rgba(44, 159, 69, 0.1);
+            color: #2C9F45;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .food-tag:hover {
+            background-color: rgba(44, 159, 69, 0.2);
+        }
+        
+        .food-tag.selected {
+            background-color: #2C9F45;
+            color: white;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: #2C9F45;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #249138;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #E0E0E0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #D0D0D0;
+        }
+        
+        .recurring-options {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        .recurring-checkbox:checked ~ .recurring-options {
+            display: block;
+        }
+        
+        .schedule-info {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .schedule-info h2 {
+            color: #2C9F45;
+            margin-top: 0;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-card h3 {
+            margin-top: 0;
+            color: #34495E;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-card h3 i {
+            color: #2C9F45;
+        }
+        
+        .info-card p {
+            margin-bottom: 0;
+            color: #7F8C8D;
+        }
+        
+        .footer {
+            margin-top: auto;
+        }
+
+        /* Time slot selection */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .time-slot {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .time-slot:hover {
+            border-color: #2C9F45;
+        }
+        
+        .time-slot.selected {
+            background-color: #2C9F45;
+            color: white;
+            border-color: #2C9F45;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .success-message h2 {
+            color: #155724;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+            <div class="underline" style="width: 40px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="about-us.html" style="text-decoration: none; color: white;">About Us</a>
+            <div class="underline" style="width: 61px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="support.html" style="text-decoration: none; color: white;">Support</a>
+            <div class="underline" style="width: 55px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="contact-us.html" style="text-decoration: none; color: white;">Contact Us</a>
+            <div class="underline" style="width: 73px;"></div>
+        </div>
+
+        <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+        <a href="dashboard.html" style="text-decoration: none;">
+            <div class="didact-gothic-regular navigation-options" style="flex: 1;">
+                <span style="color: white;">Dashboard</span>
+                <div class="underline" style="width: 80px;"></div>
+            </div>
+        </a>
+
+        <a href="test.html" style="text-decoration: none;">
+            <div class="donate didact-gothic-regular">
+                <span>Donate</span>
+            </div>
+        </a>
+    </div>
+    
+    <div class="schedule-container">
+        <div class="schedule-hero">
+            <h1>Schedule Your Food Donation</h1>
+            <p>Plan ahead and make a consistent impact. Schedule one-time or recurring donations to help us fight hunger more effectively.</p>
+        </div>
+        
+        <div class="success-message" id="success-message">
+            <h2>Donation Scheduled Successfully!</h2>
+            <p>Thank you for your generosity. Your scheduled donation will help feed those in need.</p>
+            <p>We'll send you a reminder email closer to the pickup date.</p>
+            <div style="margin-top: 20px">
+                <a href="dashboard.html" class="btn btn-primary">Return to Dashboard</a>
+            </div>
+        </div>
+        
+        <form class="schedule-form" id="donation-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="donation-type">Donation Type</label>
+                    <select id="donation-type" required>
+                        <option value="">Select donation type</option>
+                        <option value="cooked-food">Cooked Food</option>
+                        <option value="raw-ingredients">Raw Ingredients</option>
+                        <option value="packaged-food">Packaged Food</option>
+                        <option value="mixed">Mixed Items</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pickup-location">Pickup Location</label>
+                    <select id="pickup-location" required>
+                        <option value="">Select location</option>
+                        <option value="home">From My Home</option>
+                        <option value="storage-a">Storage Unit A</option>
+                        <option value="storage-c">Storage Unit C</option>
+                        <option value="storage-f">Storage Unit F</option>
+                        <option value="restaurant">My Restaurant/Business</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="donation-date">Donation Date</label>
+                    <input type="date" id="donation-date" required min="" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Preferred Time Slot</label>
+                    <div class="time-slots">
+                        <div class="time-slot" data-time="morning">9AM - 12PM</div>
+                        <div class="time-slot" data-time="afternoon">12PM - 3PM</div>
+                        <div class="time-slot" data-time="evening">3PM - 6PM</div>
+                        <div class="time-slot" data-time="night">6PM - 9PM</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Food Categories</label>
+                    <p style="margin-top: 0; color: #7F8C8D; font-size: 14px;">Select all that apply</p>
+                    <div class="food-tags">
+                        <div class="food-tag" data-tag="grains">Grains & Rice</div>
+                        <div class="food-tag" data-tag="vegetables">Vegetables</div>
+                        <div class="food-tag" data-tag="fruits">Fruits</div>
+                        <div class="food-tag" data-tag="dairy">Dairy</div>
+                        <div class="food-tag" data-tag="protein">Protein Items</div>
+                        <div class="food-tag" data-tag="bakery">Bakery Items</div>
+                        <div class="food-tag" data-tag="canned">Canned Goods</div>
+                        <div class="food-tag" data-tag="prepared">Prepared Meals</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantity-estimate">Estimated Quantity</label>
+                    <select id="quantity-estimate" required>
+                        <option value="">Select quantity</option>
+                        <option value="small">Small (Feeds 1-2 people)</option>
+                        <option value="medium">Medium (Feeds 3-5 people)</option>
+                        <option value="large">Large (Feeds 6-10 people)</option>
+                        <option value="xlarge">Extra Large (Feeds 10+ people)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="donation-notes">Additional Notes</label>
+                <textarea id="donation-notes" placeholder="Any dietary restrictions, storage requirements, or other details we should know?"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="recurring-donation" class="recurring-checkbox">
+                    <label for="recurring-donation">Make this a recurring donation</label>
+                </div>
+                
+                <div class="recurring-options">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="recurring-frequency">Frequency</label>
+                            <select id="recurring-frequency">
+                                <option value="weekly">Weekly</option>
+                                <option value="biweekly">Every Two Weeks</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="recurring-until">Until</label>
+                            <input type="date" id="recurring-until" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-buttons">
+                <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary">Schedule Donation</button>
+            </div>
+        </form>
+        
+        <div class="schedule-info">
+            <h2>How It Works</h2>
+            <p>When you schedule a donation, our team prepares for pickup and ensures your food reaches those who need it most.</p>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><span>📝</span> Step 1: Schedule</h3>
+                    <p>Fill out this form with details about your donation and preferred pickup time.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>📧</span> Step 2: Confirmation</h3>
+                    <p>Receive a confirmation email with all the details of your scheduled donation.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>🚚</span> Step 3: Pickup</h3>
+                    <p>Our volunteers will arrive at the scheduled time to collect your food donation.</p>
+                </div>
+                
+                <div class="info-card">
+                    <h3><span>❤️</span> Step 4: Impact</h3>
+                    <p>Your donation will be distributed to those in need, and you'll receive an impact update.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-icons left">
+            <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+        </div>                <div class="copyright">
+                    <p>2025 FoodBridge. All rights reserved.</p>
+                </div>
+        
+        <div class="social-icons right">
+            <a href="#" class="social-link"><img src="../assets/x.png" alt="X" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set minimum date to today
+            const today = new Date();
+            const formattedToday = today.toISOString().split('T')[0];
+            document.getElementById('donation-date').min = formattedToday;
+            
+            // Time slot selection
+            const timeSlots = document.querySelectorAll('.time-slot');
+            timeSlots.forEach(slot => {
+                slot.addEventListener('click', function() {
+                    timeSlots.forEach(s => s.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Food tag selection
+            const foodTags = document.querySelectorAll('.food-tag');
+            foodTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+            
+            // Form submission
+            const donationForm = document.getElementById('donation-form');
+            donationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get selected time slot
+                const selectedTimeSlot = document.querySelector('.time-slot.selected');
+                if (!selectedTimeSlot) {
+                    alert('Please select a time slot');
+                    return;
+                }
+                
+                // Get selected food tags
+                const selectedTags = Array.from(document.querySelectorAll('.food-tag.selected'))
+                    .map(tag => tag.dataset.tag);
+                if (selectedTags.length === 0) {
+                    alert('Please select at least one food category');
+                    return;
+                }
+                
+                // In a real application, we'd send this data to the server
+                const formData = {
+                    donationType: document.getElementById('donation-type').value,
+                    pickupLocation: document.getElementById('pickup-location').value,
+                    donationDate: document.getElementById('donation-date').value,
+                    timeSlot: selectedTimeSlot.dataset.time,
+                    foodCategories: selectedTags,
+                    quantityEstimate: document.getElementById('quantity-estimate').value,
+                    notes: document.getElementById('donation-notes').value,
+                    isRecurring: document.getElementById('recurring-donation').checked,
+                    recurringFrequency: document.getElementById('recurring-frequency')?.value,
+                    recurringUntil: document.getElementById('recurring-until')?.value
+                };
+                
+                console.log('Donation scheduled:', formData);
+                
+                // Store in localStorage for demo purposes
+                const donations = JSON.parse(localStorage.getItem('scheduledDonations') || '[]');
+                donations.push({
+                    ...formData,
+                    id: Date.now(),
+                    createdAt: new Date().toISOString()
+                });
+                localStorage.setItem('scheduledDonations', JSON.stringify(donations));
+                
+                // Show success message
+                donationForm.style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                
+                // Update user donation count in localStorage
+                const loggedInEmail = localStorage.getItem("currentUser");
+                if (loggedInEmail) {
+                    const users = JSON.parse(localStorage.getItem("users")) || {};
+                    if (users[loggedInEmail]) {
+                        users[loggedInEmail].statistics.donations = 
+                            (users[loggedInEmail].statistics.donations || 0) + 1;
+                        localStorage.setItem("users", JSON.stringify(users));
+                    }
+                }
+            });
+            
+            // Cancel button
+            document.getElementById('cancel-btn').addEventListener('click', function() {
+                window.location.href = 'dashboard.html';
+            });
+        });
+    </script>
+</body>
+</html>

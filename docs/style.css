@@ -1,0 +1,410 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+    background-image: url("assets/DSC_GOOD.jpg");
+    background-size: 2000px;
+    background-position: -10px center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.header {
+    width: 1512px;
+    height: 51px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.didact-gothic-regular {
+    font-family: "Didact Gothic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 80px;
+    height: 40px;
+    color: white;
+}
+
+.navigation-options {
+    padding-top: 1em;
+    flex: 2;
+    cursor: pointer;
+}
+
+.underline {
+    height: 3px;
+    background-color: white;
+    border-radius: 20px;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform-origin: center;
+}
+
+.navigation-options:hover .underline {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+
+.navigation-options.active .underline {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.donate {
+    width: 120px;
+    height: 51px;
+    background-color: #C84869;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.donate::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.donate:hover::before {
+    left: 0;
+}
+
+.donate span {
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease; 
+}
+
+.donate:hover span {
+    color: #C84869; /
+}
+
+.animated-text-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    height: 150px;
+}
+
+.animated-text {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 72px;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.animated-text::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: white;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.boxes-container {
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.info-box {
+    flex: 1;
+    height: 300px;
+    position: relative;
+    padding: 20px;
+    color: white;
+    overflow: hidden;
+}
+
+.box-1 {
+    background-color: #191877;
+}
+
+.box-2 {
+    background-color: #4B7CE1;
+}
+
+.box-3 {
+    background-color: #ADC6A5;
+}
+
+.box-4 {
+    background-color: #C3BC7A;
+}
+
+.box-1::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/DSC_Wheat.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.13;
+    z-index: 1;
+}
+
+.box-2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/DSC_Water.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.13;
+    z-index: 1;
+}
+
+.box-3::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/DSC_Cattle.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.13;
+    z-index: 1;
+}
+
+.box-4::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('assets/DSC_Involved.jpeg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.13;
+    z-index: 1;
+}
+
+.box-content {
+    position: relative;
+    z-index: 2;
+}
+
+.info-box h2 {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.info-box p {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.quote-section {
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+    background-color: rgba(92, 162, 178, 0.2); 
+    padding: 40px 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quote-content {
+    flex: 1;
+    padding-left: 40px;
+    max-width: 55%; 
+    padding-right: 20px; 
+}
+
+.quote-content blockquote {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 32px;
+    color: white;
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.4;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.quote-attribution {
+    margin-top: 20px;
+}
+
+.quote-attribution .author {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 22px;
+    color: white;
+    margin: 0;
+    font-weight: 800; 
+    letter-spacing: 0.5px; 
+}
+
+.quote-attribution .title {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 18px;
+    color: #f0f0f0;
+    margin: 5px 0 0 0;
+    font-style: italic;
+}
+
+.quote-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    padding-right: 40px; 
+}
+
+.quote-image img {
+    max-height: 300px;
+    max-width: 100%;
+}
+
+.partners-section {
+    width: 100%;
+    margin-top: 50px;
+    background-color: rgba(255, 255, 255, 0.3); 
+    padding: 40px 0 60px;
+}
+
+.partners-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px 20px;
+    flex-wrap: wrap;
+}
+
+.section-title {
+    position: relative;
+}
+
+.section-title h2 {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 72px; 
+    color: white;
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.orange-underline {
+    height: 6px; 
+    width: 100%;
+    background-color: #FF7F00;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.section-subtitle {
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 22px; 
+    color: white;
+    margin: 0;
+    font-style: italic;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.partners-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 200px; 
+    padding: 60px 30px; 
+}
+
+.partner-logo {
+    height: 80px;
+    max-width: 200px;
+    object-fit: contain;
+    filter: grayscale(0%); 
+    transition: all 0.3s ease;
+}
+
+.partner-logo:hover {
+    transform: scale(1.1);
+}
+
+.footer {
+    width: 100%;
+    height: 60px; 
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    padding: 0 30px;
+    box-sizing: border-box;
+}
+
+.social-icons {
+    display: flex;
+    gap: 240px; 
+    align-items: center;
+}
+
+.social-icon {
+    width: 32px; 
+    height: 32px; 
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.insta {
+    width: 50px; 
+    height: 50px; 
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+.social-link:hover .social-icon {
+    transform: scale(1.2);
+}
+
+.copyright {
+    color: white;
+    font-family: "Didact Gothic", sans-serif;
+    font-size: 18px; 
+}

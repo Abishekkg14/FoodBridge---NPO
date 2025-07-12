@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="FoodBridge">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="script.js"></script>
+        <title>Support Us - FoodBridge</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                background: linear-gradient(135deg, #6C3483, #58D68D);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                font-family: 'Poppins', sans-serif;
+            }
+            
+            .support-container {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 0 20px;
+            }
+            
+            .support-hero {
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 15px;
+                padding: 40px;
+                text-align: center;
+                margin-bottom: 30px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                border-top: 6px solid #F39C12;
+            }
+            
+            .support-hero h1 {
+                color: #2C3E50;
+                font-size: 42px;
+                margin-bottom: 20px;
+            }
+            
+            .support-hero p {
+                color: #7F8C8D;
+                font-size: 18px;
+                line-height: 1.6;
+                max-width: 800px;
+                margin: 0 auto 20px;
+            }
+            
+            .highlight-text {
+                background: linear-gradient(to right, #F39C12, #E74C3C);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                font-weight: 600;
+            }
+            
+            .donation-cards {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 25px;
+                justify-content: center;
+                margin-bottom: 40px;
+            }
+            
+            .donation-card {
+                background-color: white;
+                border-radius: 12px;
+                overflow: hidden;
+                width: 320px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .donation-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            }
+            
+            .card-header {
+                padding: 20px;
+                color: white;
+                text-align: center;
+            }
+            
+            .card-content {
+                padding: 25px;
+            }
+            
+            .card-content h3 {
+                margin-top: 0;
+                font-size: 22px;
+            }
+            
+            .card-content p {
+                color: #7F8C8D;
+                margin-bottom: 25px;
+            }
+            
+            .card-1 .card-header {
+                background: linear-gradient(to right, #3498DB, #2980B9);
+            }
+            
+            .card-2 .card-header {
+                background: linear-gradient(to right, #E74C3C, #C0392B);
+            }
+            
+            .card-3 .card-header {
+                background: linear-gradient(to right, #2ECC71, #27AE60);
+            }
+            
+            .donate-btn {
+                display: inline-block;
+                background-color: #F39C12;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            
+            .donate-btn:hover {
+                background-color: #E67E22;
+                transform: scale(1.05);
+            }
+            
+            .progress-section {
+                background-color: white;
+                border-radius: 15px;
+                padding: 40px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+            
+            .progress-title {
+                text-align: center;
+                margin-bottom: 30px;
+                color: #2C3E50;
+            }
+            
+            .progress-bar-container {
+                margin-bottom: 25px;
+            }
+            
+            .progress-bar-container h3 {
+                margin-bottom: 10px;
+                display: flex;
+                justify-content: space-between;
+            }
+            
+            .progress-bar {
+                height: 25px;
+                background-color: #EAECEE;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+            
+            .progress-fill {
+                height: 100%;
+                border-radius: 20px;
+                animation: fillProgress 2s ease-out forwards;
+                background: linear-gradient(to right, #F39C12, #E74C3C);
+                width: 0%;
+            }
+            
+            @keyframes fillProgress {
+                0% { width: 0%; }
+                100% { width: var(--progress-width); }
+            }
+            
+            .testimonial {
+                background-color: white;
+                border-radius: 15px;
+                padding: 30px;
+                margin-bottom: 30px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .testimonial p {
+                font-size: 16px;
+                line-height: 1.6;
+                color: #7F8C8D;
+                margin-bottom: 15px;
+            }
+            
+            .testimonial-author {
+                display: flex;
+                align-items: center;
+            }
+            
+            .testimonial-author img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin-right: 15px;
+                object-fit: cover;
+            }
+            
+            .testimonial-author-info h4 {
+                margin: 0;
+                color: #2C3E50;
+            }
+            
+            .testimonial-author-info p {
+                margin: 0;
+                font-size: 14px;
+                color: #95A5A6;
+            }
+            
+            .gpay-section {
+                background: linear-gradient(to right, #6a3093, #a044ff);
+                color: white;
+                border-radius: 15px;
+                padding: 30px;
+                text-align: center;
+                margin-bottom: 30px;
+                box-shadow: 0 5px 20px rgba(106, 48, 147, 0.5);
+            }
+            
+            .gpay-box {
+                background-color: white;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 20px auto;
+                max-width: 300px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .gpay-box h3 {
+                color: #6a3093;
+                margin-top: 0;
+            }
+            
+            .gpay-number {
+                font-size: 24px;
+                font-weight: 700;
+                color: #2C3E50;
+                letter-spacing: 1px;
+            }
+            
+            .contact-us-section {
+                background-color: white;
+                border-radius: 15px;
+                padding: 30px;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .contact-method {
+                margin: 20px 0;
+            }
+            
+            .contact-method i {
+                font-size: 24px;
+                color: #F39C12;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+                <div class="underline" style="width: 40px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="about-us.html" style="text-decoration: none; color: white;">About Us</a>
+                <div class="underline" style="width: 61px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options active">
+                Support
+                <div class="underline" style="width: 55px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="contact-us.html" style="text-decoration: none; color: white;">Contact Us</a>
+                <div class="underline" style="width: 73px;"></div>
+            </div>
+
+            <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+            <a href="login.html" style="text-decoration: none;"><div class="didact-gothic-regular navigation-options" style="flex: 1;">Login
+                <div class="underline" style="width: 38px;"></div>
+            </div></a>
+
+            <a href="test.html" style="text-decoration: none;">
+                <div class="donate didact-gothic-regular">
+                    <span>Donate</span>
+                </div>
+            </a>
+        </div>
+        
+        <div class="support-container">
+            <div class="support-hero">
+                <h1>Help Us <span class="highlight-text">Fight Hunger</span> Together</h1>
+                <p>At FoodBridge, we're on a mission to reduce food waste and feed those in need. Your support can make a real difference in the lives of thousands of people across the country.</p>
+                <a href="#donate" class="donate-btn">Donate Now</a>
+            </div>
+            
+            <div class="donation-cards" id="donate">
+                <div class="donation-card card-1">
+                    <div class="card-header">
+                        <h2>₹500</h2>
+                        <p>Monthly</p>
+                    </div>
+                    <div class="card-content">
+                        <h3>Feed a Family</h3>
+                        <p>Your monthly donation can provide nutritious meals to a family of four for an entire week.</p>
+                        <a href="#" class="donate-btn">Select</a>
+                    </div>
+                </div>
+                
+                <div class="donation-card card-2">
+                    <div class="card-header">
+                        <h2>₹1000</h2>
+                        <p>Monthly</p>
+                    </div>
+                    <div class="card-content">
+                        <h3>Community Impact</h3>
+                        <p>Help us expand our network of smart food storage units in underserved communities.</p>
+                        <a href="#" class="donate-btn">Select</a>
+                    </div>
+                </div>
+                
+                <div class="donation-card card-3">
+                    <div class="card-header">
+                        <h2>₹2500</h2>
+                        <p>Monthly</p>
+                    </div>
+                    <div class="card-content">
+                        <h3>Sustaining Partner</h3>
+                        <p>Become a key partner in our mission to end hunger and food waste across the country.</p>
+                        <a href="#" class="donate-btn">Select</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gpay-section">
+                <h2>Quick Donation via GPay</h2>
+                <p>For instant donations, you can directly transfer to our GPay account:</p>
+                <div class="gpay-box">
+                    <h3>GPay Number</h3>
+                    <div class="gpay-number">9150756733</div>
+                </div>
+                <p>Every contribution matters! After donating, please send us an email at <b>support@foodbridge.org</b> so we can thank you personally.</p>
+            </div>
+            
+            <div class="progress-section">
+                <h2 class="progress-title">Our Impact So Far</h2>
+                
+                <div class="progress-bar-container">
+                    <h3>
+                        <span>Food Storage Units Built</span>
+                        <span>25/100</span>
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress-width: 25%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <h3>
+                        <span>Monthly Meals Provided</span>
+                        <span>15,000/50,000</span>
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress-width: 30%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <h3>
+                        <span>Annual Funding Goal</span>
+                        <span>₹25L/₹100L</span>
+                    </h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="--progress-width: 25%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p>"I've been supporting FoodBridge for over a year now, and I've seen firsthand the impact they're making. Their smart food storage units have transformed how we think about food donation and are making a real difference in communities."</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Testimonial Author">
+                    <div class="testimonial-author-info">
+                        <h4>Priya Sharma</h4>
+                        <p>Monthly Donor since 2022</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-us-section">
+                <h2>Need More Information?</h2>
+                <p>Our team is happy to answer any questions about our funding needs and how your donations are used.</p>
+                
+                <div class="contact-method">
+                    <i>📧</i>
+                    <h3>Email Us</h3>
+                    <p>donations@foodbridge.org</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i>📞</i>
+                    <h3>Call Us</h3>
+                    <p>+91 9150756733</p>
+                </div>
+                
+                <div class="contact-method">
+                    <i>💼</i>
+                    <h3>Corporate Partnerships</h3>
+                    <p>For corporate giving and CSR initiatives, please contact our partnerships team at partners@foodbridge.org</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            <div class="social-icons left">
+                <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+                <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+            </div>
+            
+            <div class="copyright">
+                <p>2025 FoodBridge. All rights reserved.</p>
+            </div>
+            
+            <div class="social-icons right">
+                <a href="#" class="social-link"><img src="../assets/x.png" alt="X" class="social-icon"></a>
+                <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+            </div>
+        </footer>
+        
+        <script>
+            // Animation for the progress bars when they come into view
+            function animateProgressBars() {
+                const progressBars = document.querySelectorAll('.progress-fill');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.width = entry.target.style.getPropertyValue('--progress-width');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                progressBars.forEach(bar => {
+                    observer.observe(bar);
+                });
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                animateProgressBars();
+            });
+        </script>
+    </body>
+</html>

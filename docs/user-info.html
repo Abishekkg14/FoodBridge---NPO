@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - FoodBridge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #4A148C, #7B1FA2);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .profile-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .profile-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #7B1FA2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 36px;
+            font-weight: 600;
+        }
+        
+        .profile-info h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #333;
+        }
+        
+        .profile-info p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+        
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .profile-badge {
+            background-color: rgba(123, 31, 162, 0.1);
+            color: #7B1FA2;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .profile-badge.gold {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+        }
+        
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        
+        .profile-section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #7B1FA2;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #6A1B9A;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: #E0E0E0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #D0D0D0;
+        }
+        
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+        
+        .preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .preference-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preference-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-toggle {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .toggle-input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        .toggle-input:checked + .slider {
+            background-color: #7B1FA2;
+        }
+        
+        .toggle-input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+        
+        .footer {
+            margin-top: auto;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #7B1FA2;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .session-history {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .session-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .session-item:last-child {
+            border-bottom: none;
+        }
+        
+        .session-item .device {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .session-item .time {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+            <div class="underline" style="width: 40px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="about-us.html" style="text-decoration: none; color: white;">About Us</a>
+            <div class="underline" style="width: 61px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="support.html" style="text-decoration: none; color: white;">Support</a>
+            <div class="underline" style="width: 55px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="contact-us.html" style="text-decoration: none; color: white;">Contact Us</a>
+            <div class="underline" style="width: 73px;"></div>
+        </div>
+
+        <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+        <a href="dashboard.html" style="text-decoration: none;">
+            <div class="didact-gothic-regular navigation-options" style="flex: 1;">
+                <span style="color: white;">Dashboard</span>
+                <div class="underline" style="width: 80px;"></div>
+            </div>
+        </a>
+
+        <a href="test.html" style="text-decoration: none;">
+            <div class="donate didact-gothic-regular">
+                <span>Donate</span>
+            </div>
+        </a>
+    </div>
+    
+    <div class="profile-container">
+        <div class="success-message" id="success-message">
+            Profile updated successfully!
+        </div>
+        
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="user-avatar">U</div>
+                <div class="profile-info">
+                    <h1 id="user-name">User Name</h1>
+                    <p id="user-email">user@example.com</p>
+                    <div class="badge-container">
+                        <div class="profile-badge gold"><span>🏆</span> Food Hero</div>
+                        <div class="profile-badge"><span>🌟</span> <span id="badge-donations">12</span> Donations</div>
+                        <div class="profile-badge"><span>📅</span> Member since <span id="member-since">2023</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-label">Total Donations</div>
+                    <div class="stat-number" id="total-donations">12</div>
+                    <div class="stat-label">Items donated</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-label">People Fed</div>
+                    <div class="stat-number" id="people-fed">96</div>
+                    <div class="stat-label">Estimated impact</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-label">Food Saved</div>
+                    <div class="stat-number" id="food-saved">48</div>
+                    <div class="stat-label">Kilograms</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-label">Visit Count</div>
+                    <div class="stat-number" id="visit-count">24</div>
+                    <div class="stat-label">Platform visits</div>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h2>Account Information</h2>
+                <form id="profile-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" placeholder="Your full name" value="User Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Your phone number" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Your email address" value="user@example.com" readonly>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" placeholder="Your location" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="profile-section">
+                <h2>Notification Preferences</h2>
+                <div>
+                    <div class="notification-item">
+                        <span>Email notifications</span>
+                        <label class="notification-toggle">
+                            <input type="checkbox" class="toggle-input" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <span>SMS notifications</span>
+                        <label class="notification-toggle">
+                            <input type="checkbox" class="toggle-input">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <span>Donation reminders</span>
+                        <label class="notification-toggle">
+                            <input type="checkbox" class="toggle-input" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <span>Impact reports</span>
+                        <label class="notification-toggle">
+                            <input type="checkbox" class="toggle-input" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="notification-item">
+                        <span>Community updates</span>
+                        <label class="notification-toggle">
+                            <input type="checkbox" class="toggle-input" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h2>Food Preferences</h2>
+                <p>Indicate which types of food you're most likely to donate. This helps us better plan our operations.</p>
+                <div class="preferences-grid">
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-grains" checked>
+                        <label for="pref-grains">Grains & Rice</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-vegetables" checked>
+                        <label for="pref-vegetables">Vegetables</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-fruits">
+                        <label for="pref-fruits">Fruits</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-dairy">
+                        <label for="pref-dairy">Dairy</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-protein" checked>
+                        <label for="pref-protein">Protein Items</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-bakery">
+                        <label for="pref-bakery">Bakery Items</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-canned" checked>
+                        <label for="pref-canned">Canned Goods</label>
+                    </div>
+                    <div class="preference-item">
+                        <input type="checkbox" id="pref-prepared">
+                        <label for="pref-prepared">Prepared Meals</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h2>Login History</h2>
+                <div class="session-history">
+                    <div class="session-item">
+                        <span class="device">Chrome on Windows</span>
+                        <span class="time">Today, 10:45 AM</span>
+                    </div>
+                    <div class="session-item">
+                        <span class="device">Firefox on Windows</span>
+                        <span class="time">Yesterday, 3:22 PM</span>
+                    </div>
+                    <div class="session-item">
+                        <span class="device">Mobile App on Android</span>
+                        <span class="time">Mar 15, 2023</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h2>Account Management</h2>
+                <div class="form-buttons">
+                    <button type="button" id="change-password-btn" class="btn btn-secondary">Change Password</button>
+                    <button type="button" id="logout-btn" class="btn btn-secondary">Logout</button>
+                    <button type="button" id="delete-account-btn" class="btn btn-danger">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-icons left">
+            <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+        </div>
+        
+        <div class="copyright">
+            <p>2025 FoodBridge. All rights reserved.</p>
+        </div>
+        
+        <div class="social-icons right">
+            <a href="#" class="social-link"><img src="../assets/x.png" alt="X" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const currentUser = localStorage.getItem("currentUser");
+            if (!currentUser) {
+                window.location.href = "login.html";
+                return;
+            }
+            
+            // Get user data
+            const users = JSON.parse(localStorage.getItem("users")) || {};
+            const userData = users[currentUser];
+            
+            if (!userData) {
+                window.location.href = "login.html";
+                return;
+            }
+            
+            // Populate user info
+            document.getElementById("user-email").textContent = currentUser;
+            
+            const firstName = currentUser.split('@')[0];
+            document.getElementById("user-name").textContent = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+            document.getElementById("user-avatar").textContent = firstName.charAt(0).toUpperCase();
+            
+            // Set form values
+            document.getElementById("fullname").value = userData.fullname || firstName.charAt(0).toUpperCase() + firstName.slice(1);
+            document.getElementById("email").value = currentUser;
+            document.getElementById("phone").value = userData.phone || "";
+            document.getElementById("location").value = userData.location || "";
+            
+            // Set statistics
+            const donations = userData.statistics?.donations || 0;
+            document.getElementById("total-donations").textContent = donations;
+            document.getElementById("badge-donations").textContent = donations;
+            document.getElementById("people-fed").textContent = donations * 8;
+            document.getElementById("food-saved").textContent = donations * 4;
+            
+            const visits = userData.statistics?.visits || 0;
+            document.getElementById("visit-count").textContent = visits;
+            
+            // Calculate member since date
+            if (userData.statistics?.joined) {
+                const joinedDate = new Date(userData.statistics.joined);
+                document.getElementById("member-since").textContent = joinedDate.getFullYear();
+            }
+            
+            // Form submission
+            document.getElementById("profile-form").addEventListener("submit", function(e) {
+                e.preventDefault();
+                
+                // Update user data
+                userData.fullname = document.getElementById("fullname").value;
+                userData.phone = document.getElementById("phone").value;
+                userData.location = document.getElementById("location").value;
+                
+                // Get food preferences
+                userData.preferences = {
+                    grains: document.getElementById("pref-grains").checked,
+                    vegetables: document.getElementById("pref-vegetables").checked,
+                    fruits: document.getElementById("pref-fruits").checked,
+                    dairy: document.getElementById("pref-dairy").checked,
+                    protein: document.getElementById("pref-protein").checked,
+                    bakery: document.getElementById("pref-bakery").checked,
+                    canned: document.getElementById("pref-canned").checked,
+                    prepared: document.getElementById("pref-prepared").checked
+                };
+                
+                // Get notification preferences
+                const notificationToggles = document.querySelectorAll('.toggle-input');
+                userData.notifications = {
+                    email: notificationToggles[0].checked,
+                    sms: notificationToggles[1].checked,
+                    reminders: notificationToggles[2].checked,
+                    impactReports: notificationToggles[3].checked,
+                    communityUpdates: notificationToggles[4].checked
+                };
+                
+                // Save user data
+                users[currentUser] = userData;
+                localStorage.setItem("users", JSON.stringify(users));
+                
+                // Show success message
+                const successMessage = document.getElementById("success-message");
+                successMessage.style.display = "block";
+                
+                // Hide success message after 3 seconds
+                setTimeout(function() {
+                    successMessage.style.display = "none";
+                }, 3000);
+                
+                // Update display name
+                const displayName = userData.fullname || firstName.charAt(0).toUpperCase() + firstName.slice(1);
+                document.getElementById("user-name").textContent = displayName;
+            });
+            
+            // Change password button
+            document.getElementById("change-password-btn").addEventListener("click", function() {
+                const newPassword = prompt("Enter new password (at least 8 characters):");
+                
+                if (newPassword) {
+                    if (newPassword.length < 8) {
+                        alert("Password must be at least 8 characters long.");
+                        return;
+                    }
+                    
+                    userData.password = newPassword;
+                    users[currentUser] = userData;
+                    localStorage.setItem("users", JSON.stringify(users));
+                    
+                    alert("Password changed successfully!");
+                }
+            });
+            
+            // Logout button
+            document.getElementById("logout-btn").addEventListener("click", function() {
+                localStorage.removeItem("currentUser");
+                window.location.href = "index.html";
+            });
+            
+            // Delete account button
+            document.getElementById("delete-account-btn").addEventListener("click", function() {
+                const confirm = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
+                
+                if (confirm) {
+                    delete users[currentUser];
+                    localStorage.setItem("users", JSON.stringify(users));
+                    localStorage.removeItem("currentUser");
+                    
+                    alert("Account deleted successfully.");
+                    window.location.href = "index.html";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

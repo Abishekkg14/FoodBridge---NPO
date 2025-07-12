@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodQuality AI - Food Quality Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2C9F45;
+            --secondary-color: #3A7CA5;
+            --accent-color: #F9A826;
+            --text-color: #333333;
+            --light-bg: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            padding-bottom: 2rem;
+        }
+        
+        .header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var (--primary-color);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+        
+        .upload-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .upload-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            max-width: 350px;
+        }
+        
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1.5rem;
+            background-color: rgba(44, 159, 69, 0.1);
+            border: 2px dashed var(--primary-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-label:hover {
+            background-color: rgba(44, 159, 69, 0.15);
+        }
+        
+        .file-input-label span {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        
+        #fileInput {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        .upload-btn {
+            padding: 0.75rem 2rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background-color: #237a36;
+        }
+        
+        .upload-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .results-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var (--shadow);
+            padding: 2rem;
+            display: none;
+        }
+        
+        .results-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var (--secondary-color);
+            text-align: center;
+        }
+        
+        .results-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .data-container {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .data-card {
+            background-color: #f5f7fa;
+            border-left: 4px solid var(--accent-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .data-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .data-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .data-label {
+            font-weight: 600;
+        }
+        
+        .data-value {
+            background-color: rgba(58, 124, 165, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(44, 159, 69, 0.2);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .results-content {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 15px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            margin-right: 20px;
+        }
+        
+        .back-button:hover {
+            background-color: #237a36;
+            transform: translateX(-3px);
+        }
+        
+        .back-arrow {
+            font-size: 1.2rem;
+        }
+
+        .status-image-container {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .status-image {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .status-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .status-text.good {
+            color: var(--primary-color);
+        }
+        
+        .status-text.bad {
+            color: #E53935;
+        }
+        
+        .no-food-alert {
+            background-color: #E53935;
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-button">
+            <span class="back-arrow">←</span>
+            <span>Home</span>
+        </a>
+        
+        <div class="logo">
+            <div class="logo-icon">🥗</div>
+            <div class="logo-text">FoodBridge</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1>Food Quality Assessment</h1>
+            <p>Before you start donating, we need to analyze the quality of the food to ensure its edible to eat</p> <br>
+            <p>Upload an image of your food and our AI will analyze its quality, freshness, and nutritional value in seconds.</p>
+        </section>
+        
+        <section class="upload-section">
+            <h2>Upload Food Image</h2>
+            <div class="upload-container">
+                <div class="file-input-wrapper">
+                    <label class="file-input-label" for="fileInput">
+                        <span id="file-name">Select an image or drag and drop here</span>
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*">
+                </div>
+                <button class="upload-btn" type="button" onclick="uploadImage()" id="uploadButton" disabled>Analyze Food</button>
+            </div>
+            <div class="loader" id="loader">
+                <div class="loader-spinner"></div>
+                <p>Analyzing your food image...</p>
+            </div>
+        </section>
+        
+        <section class="results-section" id="results-section">
+            <h2>Analysis Results</h2>
+            <div id="debug-response" style="background:#f8f8f8;color:#333;font-size:0.9em;padding:8px 12px;margin-bottom:10px;display:none;border:1px solid #ccc;word-break:break-all"></div>
+            <div id="no-food-alert" class="no-food-alert">
+                <strong>⚠️ NO FOOD DETECTED IN THE IMAGE</strong> - Please upload an image containing food for analysis
+            </div>
+            <div class="results-content">
+                <div class="image-container">
+                    <img id="uploadedImage" src="" alt="Uploaded food image">
+                    
+                    <div class="status-image-container" id="status-container">
+                        <img id="statusImage" src="" alt="Food Quality Status" class="status-image">
+                        <p id="statusText" class="status-text">Status</p>
+                    </div>
+                    
+                    <!-- Add Find Nearest Drop-off button -->
+                    <div class="next-action-container" id="next-action" style="display: none; margin-top: 20px;">
+                        <a href="map.html" class="upload-btn" style="text-decoration: none;">Find Nearest Drop-off Location</a>
+                    </div>
+                </div>
+                <div class="data-container">
+                    <div class="data-card">
+                        <h3>Image Details</h3>
+                        <div class="data-item">
+                            <span class="data-label">Dimensions</span>
+                            <span class="data-value" id="imageSize">--</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">File Size</span>
+                            <span class="data-value" id="fileSize">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h3>Food Identification</h3>
+                        <div class="data-item">
+                            <span class="data-label">Detected Dish</span>
+                            <span class="data-value" id="dish-name">--</span>
+                        </div>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h3>Food Quality Assessment</h3>
+                        <div class="data-item">
+                            <span class="data-label">Freshness Score</span>
+                            <span class="data-value" id="freshness">--</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">Estimated Quality</span>
+                            <span class="data-value" id="quality">--</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">Nutrition Estimate</span>
+                            <span class="data-value" id="nutrition">--</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="data-label">Quantity</span>
+                            <span class="data-value" id="quantity">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- <footer class="footer">
+        <p>&copy; 2025 FoodQuality AI. All rights reserved.</p>
+    </footer> -->
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileNameDisplay = document.getElementById('file-name');
+        const uploadButton = document.getElementById('uploadButton');
+        
+        // Define API endpoint URLs - if one doesn't work, we'll try others
+        const API_ENDPOINTS = [
+            window.location.origin + "/upload"
+        ];
+        
+        // Utility to format file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + " B";
+            else if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            else return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+        }
+
+        fileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const fileName = this.files[0].name;
+                fileNameDisplay.textContent = fileName;
+                uploadButton.disabled = false;
+            } else {
+                fileNameDisplay.textContent = 'Select an image or drag and drop here';
+                uploadButton.disabled = true;
+            }
+        });
+        
+        async function uploadImage() {
+            let fileInput = document.getElementById('fileInput');
+            let file = fileInput.files[0];
+            if (!file) {
+                alert("Please select a file");
+                return;
+            }
+            // Remove this debug log if not needed
+            // console.log("Selected file:", file);
+            document.getElementById('loader').style.display = 'block';
+            uploadButton.disabled = true;
+            document.getElementById('no-food-alert').style.display = 'none';
+            document.getElementById('debug-response').style.display = 'none';
+            document.getElementById('debug-response').textContent = '';
+            // Reset status and image
+            document.getElementById('status-container').style.display = 'none';
+            document.getElementById('uploadedImage').src = "";
+            document.getElementById('uploadedImage').alt = "Uploaded food image";
+            let formData = new FormData();
+            formData.append("file", file);
+            // Do NOT try to log FormData file content directly, it can cause issues in some browsers
+            let connected = false;
+            let response = null;
+            let lastError = null;
+            for (const endpoint of API_ENDPOINTS) {
+                try {
+                    console.log("Trying endpoint:", endpoint);
+                    response = await fetch(endpoint, {
+                        method: "POST",
+                        body: formData,
+                        mode: 'cors'
+                    });
+                    connected = true;
+                    break;
+                } catch (error) {
+                    lastError = error;
+                    console.error("Fetch error:", error);
+                }
+            }
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('results-section').style.display = 'block';
+            if (!connected) {
+                showError("Could not connect to analysis server.");
+                document.getElementById('debug-response').style.display = 'block';
+                document.getElementById('debug-response').textContent = "Fetch failed: " + (lastError ? lastError.message : "Unknown error");
+                uploadButton.disabled = false;
+                return;
+            }
+            let data;
+            try {
+                data = await response.json();
+                document.getElementById('debug-response').style.display = 'block';
+                document.getElementById('debug-response').textContent = "Raw response: " + JSON.stringify(data, null, 2);
+                console.log("Backend response:", data);
+            } catch (e) {
+                showError("Server returned an invalid response: " + e.message);
+                document.getElementById('debug-response').style.display = 'block';
+                document.getElementById('debug-response').textContent = "Error parsing JSON: " + e.message + "\n" + (await response.text());
+                uploadButton.disabled = false;
+                return;
+            }
+            if (!data || Object.keys(data).length === 0) {
+                showError("Empty response from server.");
+                document.getElementById('debug-response').style.display = 'block';
+                document.getElementById('debug-response').textContent = "Empty response object.";
+                uploadButton.disabled = false;
+                return;
+            }
+            if (data.error) {
+                showError(data.error);
+                uploadButton.disabled = false;
+                return;
+            }
+            let imgElement = document.getElementById('uploadedImage');
+            if (data.image_url) {
+                let imgUrl = data.image_url;
+                if (imgUrl.endsWith('//')) imgUrl = imgUrl.replace(/\/+$/, '/');
+                imgElement.src = imgUrl + "?t=" + Date.now();
+                imgElement.alt = "Uploaded food image";
+                imgElement.onerror = function() {
+                    this.src = "https://via.placeholder.com/400x300?text=Image+Load+Failed";
+                };
+            } else {
+                imgElement.src = "";
+                imgElement.alt = "No image";
+            }
+            document.getElementById('fileSize').textContent = file ? formatFileSize(file.size) : "--";
+            document.getElementById('imageSize').textContent = (data.width && data.height) ? `${data.width} × ${data.height} px` : "--";
+            if (data.ai_analysis) {
+                const analysis = data.ai_analysis;
+                if (analysis.is_food === false) {
+                    document.getElementById('no-food-alert').style.display = 'block';
+                    document.getElementById('dish-name').textContent = "Not a food image";
+                    document.getElementById('freshness').textContent = "N/A";
+                    document.getElementById('quality').textContent = analysis.quality || "Not Food";
+                    document.getElementById('nutrition').textContent = "N/A";
+                    document.getElementById('quantity').textContent = "N/A";
+                    setStatus("NO FOOD DETECTED IN THE IMAGE", false);
+                    document.getElementById('next-action').style.display = 'none';
+                    uploadButton.disabled = false;
+                    return;
+                }
+                document.getElementById('no-food-alert').style.display = 'none';
+                document.getElementById('dish-name').textContent = analysis.dish || "Unknown Food Item";
+                document.getElementById('freshness').textContent = (analysis.freshness !== undefined && analysis.freshness !== null) ? `${analysis.freshness}%` : "Not available";
+                document.getElementById('quality').textContent = analysis.quality || "Not available";
+                document.getElementById('nutrition').textContent = (analysis['nutrition value'] !== undefined ? analysis['nutrition value'] : analysis.nutrition_value) || "Not available";
+                document.getElementById('quantity').textContent = analysis.quantity || "Not available";
+                setStatus(analysis.quality, true);
+                document.getElementById('next-action').style.display = 'block';
+            } else {
+                showError("No analysis data received.");
+                document.getElementById('debug-response').style.display = 'block';
+                document.getElementById('debug-response').textContent += "\nNo ai_analysis key in response.";
+            }
+            uploadButton.disabled = false;
+        }
+
+        function showError(msg) {
+            document.getElementById('results-section').style.display = 'block';
+            document.getElementById('no-food-alert').style.display = 'block';
+            document.getElementById('no-food-alert').innerHTML = `<strong>⚠️ ERROR:</strong> ${msg}`;
+            document.getElementById('dish-name').textContent = "--";
+            document.getElementById('freshness').textContent = "--";
+            document.getElementById('quality').textContent = "--";
+            document.getElementById('nutrition').textContent = "--";
+            document.getElementById('quantity').textContent = "--";
+            setStatus("Error", false);
+            document.getElementById('next-action').style.display = 'none';
+        }
+
+        function setStatus(quality, isFood) {
+            const statusContainer = document.getElementById('status-container');
+            const statusImage = document.getElementById('statusImage');
+            const statusText = document.getElementById('statusText');
+            statusContainer.style.display = 'block';
+            if (!isFood || !quality || quality.toLowerCase().includes("not food") || quality.toLowerCase().includes("can't determine")) {
+                statusImage.src = "../assets/thumb-down.png";
+                statusText.textContent = "Food Not Recommended";
+                statusText.className = 'status-text bad';
+            } else if (quality.toLowerCase().includes("good")) {
+                statusImage.src = "../assets/thumb-up.png";
+                statusText.textContent = "Food Approved";
+                statusText.className = 'status-text good';
+            } else {
+                statusImage.src = "../assets/thumb-down.png";
+                statusText.textContent = "Food Not Recommended";
+                statusText.className = 'status-text bad';
+            }
+        }
+
+        async function checkServerStatus() {
+            for (const baseUrl of API_ENDPOINTS) {
+                try {
+                    const endpoint = new URL(baseUrl);
+                    const response = await fetch(`${endpoint.protocol}//${endpoint.hostname}:${endpoint.port}/`, {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    if (response.ok || response.status === 404) {
+                        console.log(`Server is reachable at ${endpoint.protocol}//${endpoint.hostname}:${endpoint.port}/`);
+                        return true;
+                    }
+                } catch (error) {
+                    console.warn(`Server check failed for ${baseUrl}: ${error.message}`);
+                }
+            }
+            console.error("All server endpoints are unreachable");
+            return false;
+        }
+        
+        // Check server status when page loads
+        window.addEventListener('load', async () => {
+            const serverAvailable = await checkServerStatus();
+            if (!serverAvailable) {
+                // Create a server status indicator
+                const container = document.querySelector('.container');
+                const serverAlert = document.createElement('div');
+                serverAlert.style.backgroundColor = '#f8d7da';
+                serverAlert.style.color = '#721c24';
+                serverAlert.style.padding = '10px 15px';
+                serverAlert.style.marginBottom = '20px';
+                serverAlert.style.borderRadius = '4px';
+                serverAlert.style.textAlign = 'center';
+                serverAlert.innerHTML = `
+                    <strong>Warning:</strong> Analysis server appears to be offline. 
+                    Please make sure the Flask server is running on port 5002.
+                `;
+                container.insertBefore(serverAlert, container.firstChild);
+            }
+        });
+    </script>
+
+    <!--
+    IMPORTANT:
+    You are seeing the JSON error as the page because you are opening test.html via the Flask server,
+    but Flask is not configured to serve static files from the docs folder.
+    By default, Flask only serves API endpoints, not HTML files.
+    You need to tell Flask to serve static files from the docs folder.
+    -->
+
+    <!-- Solution: 
+    1. In your Flask app (api.py), add this route at the top (after Flask app creation):
+
+    from flask import send_from_directory
+
+    @app.route('/<path:filename>')
+    def serve_static(filename):
+        return send_from_directory(os.path.dirname(os.path.abspath(__file__)), filename)
+
+    2. Then, access http://localhost:5002/test.html in your browser.
+    3. Make sure test.html is in the same folder as api.py.
+
+    Now, Flask will serve test.html and all your static files, and your frontend will work as expected.
+    -->
+</body>
+</html>

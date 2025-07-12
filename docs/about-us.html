@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Naren Medarametla">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Lilita+One&display=swap" rel="stylesheet">
+        <script src="script.js"></script>
+        <title>About Us - FoodBridge</title>
+        <style>
+            body {
+                background-image: url("../assets/DSC_Background2.jpg");
+                background-color: rgba(188, 108, 37, 0.6); 
+                background-blend-mode: overlay;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed;
+                min-height: 100vh; 
+                display: flex;
+                flex-direction: column; 
+                margin: 0;
+                padding: 0;
+            }
+            
+            .about-content {
+                width: 85%;
+                max-width: 1500px;
+                margin: 30px 0 30px 50px; 
+                padding: 20px 40px; 
+            }
+            
+            .about-heading {
+                font-family: "Didact Gothic", sans-serif;
+                font-size: 60px; 
+                color: rgba(235, 235, 64, 0.93);
+                text-align: left;
+                font-weight: 700;
+                margin-bottom: 20px; 
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            
+            .about-paragraph {
+                font-family: "Didact Gothic", sans-serif;
+                font-size: 16px; 
+                color: white;
+                line-height: 1.6; 
+                margin-bottom: 20px; 
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+                text-align: left; 
+            }
+            
+            .about-paragraph:first-of-type {
+                margin-bottom: 30px;
+            }
+            
+            .about-paragraph:last-of-type {
+                margin-bottom: 70px;
+            }
+            
+            .footer {
+                margin-top: auto; 
+            }
+
+            .stats-container {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin: 20px 0; 
+                gap: 40px; 
+            }
+            
+            .stat-box {
+                flex: 0 0 220px; 
+                width: 220px; 
+                height: 150px; 
+                background-color: #E7CB99;
+                border-radius: 15px;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center; 
+                text-align: center;
+                box-shadow: 1px 1px 5px 9px rgba(0,0,0,0.20); 
+            }
+            
+            .stat-icon {
+                width: 45px;
+                height: 45px;
+                object-fit: contain;
+                margin-bottom: 20px; 
+            }
+            
+            .stat-number {
+                font-family: 'Lilita One', cursive;
+                font-size: 34px;
+                color: #333;
+                margin: 0;
+                line-height: 1.2;
+            }
+            
+            .stat-label {
+                font-family: 'Lilita One', cursive;
+                font-size: 20px;
+                color: #333;
+                margin: 5px 0 0;
+            }
+        </style>
+    </head>
+
+    <body>
+            <div class="header">
+                <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+                <div class="didact-gothic-regular navigation-options">
+                    <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+                    <div class="underline" style="width: 40px;"></div>
+                </div>
+
+                <div class="didact-gothic-regular navigation-options active">
+                    About Us
+                    <div class="underline" style="width: 61px;"></div>
+                </div>
+
+                <div class="didact-gothic-regular navigation-options">
+                    Support
+                    <div class="underline" style="width: 55px;"></div>
+                </div>
+
+                <div class="didact-gothic-regular navigation-options">
+                    Contact Us
+                    <div class="underline" style="width: 73px;"></div>
+                </div>
+
+                <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+                <a href="login.html" style="text-decoration: none;"><div class="didact-gothic-regular navigation-options" style="flex: 1;">Login
+                    <div class="underline" style="width: 38px;"></div>
+                </div></a>
+
+                <a href="test.html" style="text-decoration: none;">
+                    <div class="donate didact-gothic-regular">
+                        <span>Donate</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="about-content">
+                <h1 class="about-heading">Who we are</h1>
+                
+                <p class="about-paragraph">
+                    In India, millions of tons of food go to waste every year, even as millions of people struggle with hunger. According to estimates, nearly 40% of the food produced in the country is wasted due to inefficiencies in supply chains, improper storage, and excess consumption. This wastage not only contributes to food insecurity but also strains our natural resources like water, land, and energy, which are heavily used in food production. By redirecting surplus food to those in need, we can significantly reduce waste, ease the burden on the environment, and channel our resources toward more sustainable initiatives such as education, healthcare, and poverty alleviation. Preventing food wastage isn’t just about saving food—it’s about creating a more efficient and equitable society.
+                </p>
+
+                <p class="about-paragraph">
+                    We are a community-driven initiative dedicated to reducing food waste and helping those in need. Our smart food storage units, distributed across the city, provide a simple and effective way for individuals and businesses to donate surplus food. Through our platform, donors can easily locate the nearest storage unit and contribute, ensuring that underprivileged and homeless individuals have access to fresh and nutritious meals. Together, we are building a more compassionate and sustainable future—one meal at a time.
+                </p>
+                
+                
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <img src="../assets/wheat-plant.png" alt="Wheat Plant" class="stat-icon">
+                        <p class="stat-number">100000 Kg+</p>
+                        <p class="stat-label">Food Saved</p>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <img src="../assets/eat.png" alt="Eating" class="stat-icon">
+                        <p class="stat-number">50000+</p>
+                        <p class="stat-label">People Fed</p>
+                    </div>
+                    
+                    <div class="stat-box">
+                        <img src="../assets/heart.png" alt="Heart" class="stat-icon">
+                        <p class="stat-number">100000+</p>
+                        <p class="stat-label">Lives Impacted</p>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="social-icons left">
+                    <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+                    <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+                </div>
+                
+                <div class="copyright">
+                    <p>2025 FoodBridge. All rights reserved.</p>
+                </div>
+                
+                <div class="social-icons right">
+                    <a href="#" class="social-link"><img src="../assets/x.png" alt="X" class="social-icon"></a>
+                    <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+                </div>
+            </footer>
+    </body>
+</html>

@@ -1,0 +1,491 @@
+<!DOC    <title>User Dashboard - FoodBridge</title>
+    <link rel="stylesheet" href="styles.css">PE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - FoodBridge</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome-section {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .welcome-section h1 {
+            margin-top: 0;
+            color: #2C9F45;
+            font-size: 28px;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-card h2 {
+            margin-top: 0;
+            color: #3A7CA5;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .dashboard-card h2 i {
+            font-size: 24px;
+        }
+        
+        .stat-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-weight: 500;
+            color: #666;
+        }
+        
+        .stat-value {
+            font-weight: 700;
+            font-size: 18px;
+            color: #2C9F45;
+        }
+        
+        .chart-container {
+            height: 250px;
+            margin-top: 15px;
+        }
+        
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .activity-icon {
+            background-color: rgba(44, 159, 69, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .activity-icon i {
+            color: #2C9F45;
+            font-size: 20px;
+        }
+        
+        .activity-content h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .activity-content p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .activity-date {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background-color: rgba(44, 159, 69, 0.1);
+            color: #2C9F45;
+        }
+        
+        .badge-warning {
+            background-color: rgba(249, 168, 38, 0.1);
+            color: #F9A826;
+        }
+        
+        .footer {
+            margin-top: auto;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .dashboard-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn {
+            background-color: #2C9F45;
+            color: white;
+        }
+        
+        .primary-btn:hover {
+            background-color: #268a3c;
+            transform: translateY(-2px);
+        }
+        
+        .secondary-btn {
+            background-color: rgba(58, 124, 165, 0.1);
+            color: #3A7CA5;
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(58, 124, 165, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+            <div class="underline" style="width: 40px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="about-us.html" style="text-decoration: none; color: white;">About Us</a>
+            <div class="underline" style="width: 61px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="support.html" style="text-decoration: none; color: white;">Support</a>
+            <div class="underline" style="width: 55px;"></div>
+        </div>
+
+        <div class="didact-gothic-regular navigation-options">
+            <a href="contact-us.html" style="text-decoration: none; color: white;">Contact Us</a>
+            <div class="underline" style="width: 73px;"></div>
+        </div>
+
+        <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+        <div class="didact-gothic-regular navigation-options active" style="flex: 1;">
+            <a href="dashboard.html" style="text-decoration: none; color: white;">Dashboard</a>
+            <div class="underline" style="width: 80px;"></div>
+        </div>
+
+        <a href="test.html" style="text-decoration: none;">
+            <div class="donate didact-gothic-regular">
+                <span>Donate</span>
+            </div>
+        </a>
+    </div>
+    
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h1>Welcome back, <span id="username">User</span>!</h1>
+            <p>Track your donations and see the impact you're making with FoodBridge.</p>
+            
+            <div class="action-buttons">
+                <a href="schedule-donation.html" class="dashboard-btn primary-btn">
+                    <span>🍽️</span> Schedule New Donation
+                </a>
+                <a href="test.html" class="dashboard-btn primary-btn">
+                    <span>📷</span> Quick Donate Now
+                </a>
+                <a href="#" class="dashboard-btn secondary-btn" id="profile-btn">
+                    <span>👤</span> View Profile
+                </a>
+            </div>
+        </div>
+        
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h2><span>📊</span> Your Impact</h2>
+                <div class="stat-row">
+                    <span class="stat-label">Total Donations</span>
+                    <span class="stat-value">12</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Food Saved</span>
+                    <span class="stat-value">48 kg</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">People Fed</span>
+                    <span class="stat-value">96</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">CO₂ Prevented</span>
+                    <span class="stat-value">24 kg</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><span>📈</span> Donation History</h2>
+                <div class="chart-container">
+                    <canvas id="donationChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><span>🏆</span> Achievements</h2>
+                <div class="stat-row">
+                    <span class="stat-label">Food Hero</span>
+                    <span class="badge badge-success">Unlocked</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Community Champion</span>
+                    <span class="badge badge-success">Unlocked</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Consistent Donor</span>
+                    <span class="badge badge-warning">2/3 weeks</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Variety Master</span>
+                    <span class="badge badge-warning">4/5 food types</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><span>🔔</span> Recent Activity</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>✅</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Donation Completed</h4>
+                            <p>Vegetables and Fruits</p>
+                            <div class="activity-date">Yesterday</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>🗓️</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Donation Scheduled</h4>
+                            <p>For next Tuesday</p>
+                            <div class="activity-date">3 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>🏆</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Achievement Unlocked</h4>
+                            <p>Food Hero - 10 donations completed</p>
+                            <div class="activity-date">1 week ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>✅</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Donation Completed</h4>
+                            <p>Bread and Pastries</p>
+                            <div class="activity-date">1 week ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><span>📍</span> Nearby Locations</h2>
+                <p>Food storage units close to you:</p>
+                <div class="stat-row">
+                    <span class="stat-label">Storage A</span>
+                    <span class="stat-value">1.2 km</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Storage C</span>
+                    <span class="stat-value">2.5 km</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Storage F</span>
+                    <span class="stat-value">3.7 km</span>
+                </div>
+                <a href="map.html" class="dashboard-btn secondary-btn" style="margin-top: 10px; width: 100%;">
+                    <span>🗺️</span> View Full Map
+                </a>
+            </div>
+            
+            <div class="dashboard-card">
+                <h2><span>💬</span> Community Feed</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>👤</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Priya Sharma</h4>
+                            <p>Just donated 5kg of rice and vegetables!</p>
+                            <div class="activity-date">2 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>👤</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>FoodBridge</h4>
+                            <p>New storage unit opened in Adyar area!</p>
+                            <div class="activity-date">Yesterday</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <span>👤</span>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Ramesh Kumar</h4>
+                            <p>Thank you for the wonderful initiative. I've been donating for 3 months now.</p>
+                            <div class="activity-date">2 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="social-icons left">
+            <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+        </div>
+        
+        <div class="copyright">
+            <p>2025 FoodBridge. All rights reserved.</p>
+        </div>
+        
+        <div class="social-icons right">
+            <a href="#" class="social-link"><img src="../assets/x.png" alt="X" class="social-icon"></a>
+            <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data from localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || {};
+            const loggedInEmail = localStorage.getItem("currentUser");
+            
+            if (loggedInEmail && users[loggedInEmail]) {
+                document.getElementById("username").textContent = loggedInEmail.split('@')[0];
+                
+                // Profile button handler
+                document.getElementById("profile-btn").addEventListener("click", function() {
+                    alert(`User: ${loggedInEmail}\nDonations: ${users[loggedInEmail].statistics.donations}\nVisits: ${users[loggedInEmail].statistics.visits}`);
+                });
+            } else {
+                document.getElementById("username").textContent = "Guest";
+            }
+            
+            // Create donation chart
+            const ctx = document.getElementById('donationChart').getContext('2d');
+            const donationChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Monthly Donations',
+                        data: [1, 3, 2, 4, 2, 3],
+                        fill: true,
+                        backgroundColor: 'rgba(44, 159, 69, 0.1)',
+                        borderColor: '#2C9F45',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

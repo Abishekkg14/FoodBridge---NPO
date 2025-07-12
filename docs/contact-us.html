@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Naren Medarametla">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+        <script src="script.js"></script>
+        <title>Contact Us - FoodBridge</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                overflow-x: hidden;
+                background-image: none;
+                background-color: rgb(105, 38, 172);
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .faq-title {
+                color: white;
+                font-size: 40px;
+                font-family: "Didact Gothic", sans-serif;
+                font-weight: 400;
+                text-decoration: underline;
+                margin: 40px 0 20px 40px;
+            }
+            
+            .faq-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                gap: 30px;
+                padding: 0 40px;
+                margin-bottom: 40px;
+            }
+            
+            .faq-item {
+                width: 532px;
+                margin-bottom: 30px;
+            }
+            
+            .faq-question {
+                width: 100%;
+                height: 40px;
+                background: #D9D9D9;
+                border-radius: 20px;
+                border: 3px solid black;
+                display: flex;
+                align-items: center;
+                padding: 0 15px;
+                position: relative;
+                cursor: pointer;
+                font-family: "Didact Gothic", sans-serif;
+                font-weight: 400;
+            }
+            
+            .faq-question .plus-icon {
+                position: absolute;
+                left: 21px;
+                width: 30px;
+                height: 30px;
+            }
+            
+            .faq-answer {
+                width: calc(100% - 63px);
+                margin-left: 36px;
+                background: #D9D9D9;
+                border: 2px solid black;
+                border-top: none;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                border-bottom-left-radius: 24px;
+                border-bottom-right-radius: 24px;
+                padding: 15px;
+                margin-top: -2px;
+                display: none;
+                font-family: "Didact Gothic", sans-serif;
+                font-weight: 400;
+            }
+            
+            .contact-cta {
+                width: 100%;
+                text-align: center;
+                color: white;
+                font-size: 40px;
+                font-family: "Didact Gothic", sans-serif;
+                margin: 50px 0 20px;
+            }
+            
+            .contact-info {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 20px;
+                margin-bottom: 30px;
+            }
+            
+            .contact-info div {
+                width: 304px;
+                color: white;
+                font-size: 24px;
+                font-family: "Didact Gothic", sans-serif;
+                text-align: center;
+                padding-top: 44px;
+            }
+            
+            .contact-email {
+                text-decoration: underline;
+            }
+            
+            .footer {
+                margin-top: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img src="../assets/DSC_Icon.png" alt="logo" width="80" style="padding-right: 23em;">
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="index.html" style="text-decoration: none; color: white;">Home</a>
+                <div class="underline" style="width: 40px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="about-us.html" style="text-decoration: none; color: white;">About Us</a>
+                <div class="underline" style="width: 61px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options">
+                <a href="#" style="text-decoration: none; color: white;">Support</a>
+                <div class="underline" style="width: 55px;"></div>
+            </div>
+
+            <div class="didact-gothic-regular navigation-options active">
+                Contact Us
+                <div class="underline" style="width: 73px;"></div>
+            </div>
+
+            <img src="../assets/person.png" alt="login_icon" style="color: white; padding-left: 100px">
+
+            <a href="login.html" style="text-decoration: none;"><div class="didact-gothic-regular navigation-options" style="flex: 1;">Login
+                <div class="underline" style="width: 38px;"></div>
+            </div></a>
+
+            <a href="test.html" style="text-decoration: none;">
+                <div class="donate didact-gothic-regular">
+                    <span>Donate</span>
+                </div>
+            </a>
+        </div>
+
+        <h1 class="faq-title">FAQS</h1>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">How does food donation work?</span>
+                </div>
+                <div class="faq-answer">
+                    We connect food donors with local distribution centers. Donors can schedule pickups through our platform, and our volunteers ensure the food reaches those in need.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">What types of food are accepted?</span>
+                </div>
+                <div class="faq-answer">
+                    We accept non-perishable foods, fresh produce, and prepared meals that meet safety standards. All donations must be unexpired and in good condition.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">How can I volunteer?</span>
+                </div>
+                <div class="faq-answer">
+                    You can sign up as a volunteer through our website. We have various roles including food collection, sorting, distribution, and administrative support.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">How are my donations used?</span>
+                </div>
+                <div class="faq-answer">
+                    Financial donations help us maintain our operations, including transportation costs, storage facilities, and technology infrastructure to connect donors with recipients.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">Are donations tax-deductible?</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, we are a registered nonprofit organization and all donations are tax-deductible. You will receive a receipt for your donation for tax purposes.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <svg class="plus-icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 6.25V23.75M6.25 15H23.75" stroke="#1E1E1E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span style="margin-left: 40px;">How do I request food assistance?</span>
+                </div>
+                <div class="faq-answer">
+                    If you or someone you know needs food assistance, please fill out the form on our website or contact us directly. We'll connect you with the nearest distribution center.
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-cta">
+            Still not satisfied? <br/>
+            Don't hesitate to contact us!
+        </div>
+        
+        <div class="contact-info">
+            <div class="contact-email">foodbridge.support@gmail.com</div>
+            <div>+91 9381928410</div>
+            <div>Raise a ticket</div>
+        </div>
+        
+        <footer class="footer">
+            <div class="social-icons left">
+                <a href="#" class="social-link"><img src="../assets/facebook.png" alt="Facebook" class="social-icon"></a>
+                <a href="#" class="social-link"><img src="../assets/instagram.png" alt="Instagram" class="insta"></a>
+            </div>
+            
+            <div class="copyright">
+                <p>2025 FoodBridge. All rights reserved.</p>
+            </div>
+            
+            <div class="social-icons right">
+                <a href="#" class="social-link"><img src="../assets/x.jpeg" alt="X" class="social-icon"></a>
+                <a href="#" class="social-link"><img src="../assets/Youtube.png" alt="YouTube" class="social-icon"></a>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const faqQuestions = document.querySelectorAll('.faq-question');
+                
+                faqQuestions.forEach(question => {
+                    question.addEventListener('click', function() {
+                        const answer = this.nextElementSibling;
+                        if (answer.style.display === 'block') {
+                            answer.style.display = 'none';
+                        } else {
+                            answer.style.display = 'block';
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
